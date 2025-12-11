@@ -1,6 +1,7 @@
 {
   "name": "ts-artifact-uploader",
   "version": "1.0.0",
+  "description": "upload an artifact",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --platform=node --target=node20 --outfile=dist/index.js"
@@ -9,8 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@actions/artifact": "^4.0.0",
-    "@actions/core": "^2.0.1"
+    "@actions/artifact": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.0",

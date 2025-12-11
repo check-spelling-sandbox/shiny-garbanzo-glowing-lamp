@@ -1,6 +1,13 @@
 import { DefaultArtifactClient } from '@actions/artifact';
-import * as core from '@actions/core';
-import * as path from 'path';
+
+function info(message: string) {
+    console.log(`::notice ::${message}`);
+}
+
+function setFailed(message: string) {
+    console.log(`::error ::${message}`);
+    process.exit(1);
+}
 
 /**
  * Uploads a list of files as a GitHub Artifact.
@@ -12,7 +19,7 @@ async function uploadBuildArtifact(artifactName: string, files: string[], rootDi
     try {
         const client = new DefaultArtifactClient();
 
-        core.info(`Starting upload for artifact: ${artifactName}`);
+        info(`Starting upload for artifact: ${artifactName}`);
 
         // The uploadArtifact method returns details about the upload
         const { id, size } = await client.uploadArtifact(
@@ -21,15 +28,15 @@ async function uploadBuildArtifact(artifactName: string, files: string[], rootDi
             rootDir
         );
 
-        core.info(`Artifact uploaded successfully!`);
-        core.info(`Artifact ID: ${id}`);
-        core.info(`Total Size: ${size} bytes`);
+        info(`Artifact uploaded successfully!`);
+        info(`Artifact ID: ${id}`);
+        info(`Total Size: ${size} bytes`);
 
     } catch (error) {
         if (error instanceof Error) {
-            core.setFailed(`Failed to upload artifact: ${error.message}`);
+            setFailed(`Failed to upload artifact: ${error.message}`);
         } else {
-            core.setFailed('An unexpected error occurred during upload.');
+            setFailed('An unexpected error occurred during upload.');
         }
     }
 }
