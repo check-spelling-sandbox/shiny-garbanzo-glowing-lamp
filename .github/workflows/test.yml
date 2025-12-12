@@ -17,7 +17,15 @@ jobs:
         
       - name: Build Standalone File
         run: npm run build
-        
+
+      - name: Action vars
+        id: vars
+        uses: ./action-vars
+
       - name: Run The Standalone Script
         # This runs the single file which triggers the upload logic
         run: node dist/index.js
+        env:
+          ACTIONS_RUNTIME_URL: ${{ steps.vars.outputs.ACTIONS_RUNTIME_URL }}
+          ACTIONS_RUNTIME_TOKEN: ${{ steps.vars.outputs.ACTIONS_RUNTIME_TOKEN }}
+          ACTIONS_RESULTS_URL: ${{ steps.vars.outputs.ACTIONS_RESULTS_URL }}

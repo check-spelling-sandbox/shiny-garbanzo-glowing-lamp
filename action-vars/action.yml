@@ -1,0 +1,9 @@
+name: 'Set action vars'
+description: 'Set action vars'
+author: 'jsoref'
+branding:
+  icon: 'git-commit'
+  color: 'green'
+runs:
+  using: node24
+  main: index.js
